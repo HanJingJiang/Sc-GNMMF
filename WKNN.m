@@ -1,16 +1,16 @@
 clc,clear all
-load('Data') %ÕÒlncRNAºÍdiseaseÏàËÆ¾ØÕó£»LDÎªÔ­Ê¼¾ØÕó
-D=cell; %cellµÄÏàËÆ¾ØÕó
+load('Data') %LDä¸ºåŽŸå§‹çŸ©é˜µ
+D=cell; %cellçš„ç›¸ä¼¼çŸ©é˜µ
 L=gene;
 oldLD = LD;
 adLD = oldLD >0;
-%£¨×î¼Ñ²ÎÊý£ºK=3,a=0.5£¬a1=a2=1£©
-%¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªÒÔÏÂÇóKNN¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+%ï¼ˆæœ€ä½³å‚æ•°ï¼šK=3,a=0.5ï¼Œa1=a2=1ï¼‰
+%â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”ä»¥ä¸‹æ±‚KNNâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 L=L-diag(diag(L));
 D=D-diag(diag(D));
 [rL,cL]=size(L);
 [rD,cD]=size(D);
-K=5;  %²ÎÊýKÒ»°ãÈ¡1£¬2£¬3£¬4£¬5    
+K=5;  %å‚æ•°Kä¸€èˆ¬å–1ï¼Œ2ï¼Œ3ï¼Œ4ï¼Œ5    
 KNN_L = zeros(rL, cL);  %%for miRNA
 [sort_L,idx]=sort(L,2,'descend');
  for i = 1 : rL
@@ -23,11 +23,11 @@ KNN_D = zeros(rD, cD);  %%for disease
         KNN_D(i,idx(i,1:K))=sort_D(i,1:K);
  end     
 
-%¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªÒÔÏÂÇóÐÂµÄÈ¨ÖØ¾ØÕó¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª-
+%â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”ä»¥ä¸‹æ±‚æ–°çš„æƒé‡çŸ©é˜µâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”-
 [rows,cols]=size(adLD);  
 y_l=zeros(rows,cols);  
 y_d=zeros(rows,cols); 
-a=0.5; %²ÎÊýa=[0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
+a=0.5; %å‚æ•°a=[0.1 0.2 0.3 0.4 0.5 0.6 0.7 0.8 0.9]
 
 knn_network_l =KNN_L;  %for miRNA
 for i = 1 : rows   
@@ -53,7 +53,7 @@ for i = 1 : cols
             y_d(:,i)=y_d(:,i)/sum_d;              
 end
 
-% ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªÇóÐÂµÄ¹ØÁª¾ØÕó¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+% â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”æ±‚æ–°çš„å…³è”çŸ©é˜µâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
 for i = 1 : rows
      for j = 1 : cols
          LD_1(i,j)=max(LD(i,j),y_d(i,j));  
