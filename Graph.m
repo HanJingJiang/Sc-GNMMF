@@ -1,8 +1,8 @@
 clc,clear all
-% ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªÇóÏàËÆ¾ØÕóµÄÏ¡ÊèÍ¼¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-load('Data');%²éÕÒ¼²²¡ºÍlncµÄÏàËÆ¾ØÕó
-LL=gene; % LLÎªlncRNAÏàËÆ¾ØÕó
-DD=cell; % DDÎªdiseaseµÄÏàËÆ¾ØÕó
+% â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”æ±‚ç›¸ä¼¼çŸ©é˜µçš„ç¨€ç–å›¾â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+load('Data');
+LL=gene; 
+DD=cell; 
 L=LL-diag(diag(LL));
 D=DD-diag(diag(DD));
 [r1,c1]=size(L);
@@ -50,7 +50,7 @@ graph_D = zeros(r2, c2);
      end
      
      
-% ¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªÇóÏ¡Êè»¯ÏàËÆ¾ØÕó¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
-S_L=LL.*graph_L;      % lncRÏàËÆ¾ØÕóµÄÏ¡Êè»¯£¨P½üÁÚ·¨£©
-S_D=DD.*graph_D;      % ¼²²¡ÏàËÆ¾ØÕóµÄÏ¡Êè»¯£¨P½üÁÚ·¨£©
+% â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”æ±‚ç¨€ç–åŒ–ç›¸ä¼¼çŸ©é˜µâ€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
+S_L=LL.*graph_L;      % ç›¸ä¼¼çŸ©é˜µçš„ç¨€ç–åŒ–ï¼ˆPè¿‘é‚»æ³•ï¼‰
+S_D=DD.*graph_D;      % ç›¸ä¼¼çŸ©é˜µçš„ç¨€ç–åŒ–ï¼ˆPè¿‘é‚»æ³•ï¼‰
 save('S_L_D','S_L','S_D');
