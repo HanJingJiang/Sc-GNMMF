@@ -1,15 +1,14 @@
 clc,clear all
-tic%Ê±¼ä¿ªÊ¼
-load('40%LD2.mat') % ²éÕÒÁÚ½Ó¾ØÕóÎåÕÛºóµÄÑµÁ·¼¯ºÍ²âÊÔ¼¯
-load('40%S_L_D.mat')%²éÕÒLncRNAºÍDisease µÄÏàËÆĞÔ¾Ö¾ØÕó
-load("40%Data.mat")
+tic%æ—¶é—´å¼€å§‹
+load('LD1.mat') 
+load('S_L_D.mat')
+load("Data.mat")
 
 oldLD = LD;
 adLD = oldLD >0;
 
 Y=LD_new; %Y=train{1}; train{2}; train{3}; train{4}
-%£¨×î¼Ñ²ÎÊıÑ¡È¡£ºk=90£¬lmadp=lmadl=0.1;beta1=beta2=0.01;£©
-
+%ï¼ˆæœ€ä½³å‚æ•°é€‰å–ï¼šk=90ï¼Œlmadp=lmadl=0.1;beta1=beta2=0.01;ï¼‰
 
 %params.k=90;
 params.iterate=3000; 
@@ -42,7 +41,7 @@ for i = 1:length(values)
     D_L=zeros(n);
     D_D=zeros(m);
     for i=1:n
-        D_L(i,i)=sum(S_L(i,1:n));%D_d(i,i)È¡ÖµÎªS_dµÄµÚiĞĞÖ®ºÍ£¬·ÇÖ÷¶Ô½ÇÔªÈ¡ÖµÎª0;D_cÍ¬
+        D_L(i,i)=sum(S_L(i,1:n));%D_d(i,i)å–å€¼ä¸ºS_dçš„ç¬¬iè¡Œä¹‹å’Œï¼Œéä¸»å¯¹è§’å…ƒå–å€¼ä¸º0;D_cåŒ
     end
     for i=1:m
         D_D(i,i)=sum(S_D(i,1:m));
@@ -51,18 +50,18 @@ for i = 1:length(values)
     L_D=D_D-S_D;
     
 
-%¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ªµü´ú·¨Ôò¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª¡ª
+%â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”è¿­ä»£æ³•åˆ™â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”â€”
     fid = fopen( 'RunResult.txt','wt+');
     for step=1:iterate
-        U1=U.*((V*Y'+lmadl*U*S_L)./(V*V'*U+lmadl*U*D_L+beta1*U));%µü´úÉú³ÉµÄU¾ØÕó
+        U1=U.*((V*Y'+lmadl*U*S_L)./(V*V'*U+lmadl*U*D_L+beta1*U));%è¿­ä»£ç”Ÿæˆçš„UçŸ©é˜µ
        
-        V1=V.*((U*Y+lmadd*V*S_D)./(U*U'*V+lmadd*V*D_D+beta2*V));%µü´úÉú³ÉµÄH¾ØÕó
+        V1=V.*((U*Y+lmadd*V*S_D)./(U*U'*V+lmadd*V*D_D+beta2*V));%è¿­ä»£ç”Ÿæˆçš„HçŸ©é˜µ
       
      
         ALA = sum(diag((U*L_L)*U'));%ALA = sum(diag((U*L_L)*U'))=Tr((U*L_L)*U')=sum(sum((U*L_L).*U));;
         BLB = sum(diag((V*L_D)*V'));%BLB = sum(diag((V*L_D)*V'))=Tr((V*L_D)*V')=sum(sum((H*L_D).*V));
         obj = sum(sum((Y-U'*V).^2))+beta1*(sum(sum(U.^2)) )+beta2*(sum(sum(V.^2)))+lmadl*ALA+lmadd*BLB;
-        error=max([max(sum((U1-U).^2)),max(sum((V1-V).^2))]);%ÓÃÁĞF-·¶ÊıÀ´±£Ö¤ÊÕÁ²
+        error=max([max(sum((U1-U).^2)),max(sum((V1-V).^2))]);%ç”¨åˆ—F-èŒƒæ•°æ¥ä¿è¯æ”¶æ•›
       
         fprintf(fid,'%s\n',[sprintf('step = \t'),int2str(step),...
                 sprintf('\t obj = \t'),num2str(obj),...
@@ -72,12 +71,15 @@ for i = 1:length(values)
                 fprintf('step=%d\n',step);
                 break;
         end
-        U=U1; V=V1;    %½«U1,V1¸³Öµ¸øU,V  
+        U=U1; V=V1;    %å°†U1,V1èµ‹å€¼ç»™U,V  
     end
     fclose(fid);
-    Y5=U'*V; %5¸öÑµÁ·¼¯·Ö±ğµÃµ½5¸öÔ¤²â½á¹û
-    writematrix(V,'50%dropV40k.csv')
-   
+    Y5=U'*V; 
+
+    file_name1=sprintf('VK%d.csv', k);
+    file_name2=sprintf('UK%d.csv', k);
+    writematrix(V,file_name1)
+    writematrix(U,file_name2)
 end
 
 
