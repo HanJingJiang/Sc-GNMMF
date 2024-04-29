@@ -5,14 +5,15 @@ Hanjing Jiang, Mei-Neng Wang, Yu-An Huang, and Yabing Huang*. "Graph-Regularized
 The code is written in the MATLAB programming language. To use, please download the SC-GNMMF folder and follow the instructions provided in the "README.doc".
 Files:
 
-Data.m:It includes the matrix after cell-gene preconditioning, the cell laplacian kernel similarity matrix, and the gene laplacian kernel similarity matrix.  
+Data.m: It includes the matrix after cell-gene preconditioning, the cell laplacian kernel similarity matrix, and the gene laplacian kernel similarity matrix.  
 
-Graph.m： Corresponding to the implementation of section "Refine Cell-Cell and Gene-Gene Similarities using p-NNG" in the paper. The input is Data.m and the output is sparse gene similarity matrix and cell similarity matrix.  
+Graph.m: Corresponding to the implementation of section "Refine Cell-Cell and Gene-Gene Similarities using p-NNG" in the paper. The input is Data.m and the output is sparse gene similarity matrix and cell similarity matrix.  
 
-WKNN.m Corresponding to the implementation of section "Weighted p-NKN algorithm" in the paper.The output is the filled matrix< br >
-NNDSVD.m:This is a non-negative matrix decomposition algorithm that needs to be called in main.m.  
+WKNN.m: Corresponding to the implementation of section "Weighted p-NKN algorithm" in the paper.The output is the filled matrix.
 
-main.m:Corresponding to the implementation of Chapter D and Chapter E in the paper.  
+NNDSVD.m: This is a non-negative matrix decomposition algorithm that needs to be called in main.m.  
+
+main.m: Corresponding to the implementation of Chapter D and Chapter E in the paper.  
 
 We give the sample Data "Data.m" to run the code in its entirety.
 
