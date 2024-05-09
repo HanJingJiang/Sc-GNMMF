@@ -18,21 +18,16 @@ for i = 1:length(values)
     params.k = values(i);
     k=params.k;
     params.beta1=0.01;
-    params.beta2=0.01;
     params.lmadp=0.1;
-    params.lmadl=0.1; 
     iterate=params.iterate; 
     lmadl=params.lmadl;  
-    lmadd=params.lmadp; 
     beta1=params.beta1;
-    beta2=params.beta2; 
     fprintf('k=%d  maxiter=%d  lmadp=%d lmadl=%d  beta1=%d beta2=%d\n', k, iterate,lmadl,lmadd,beta1,beta2);
 
     [n,m]=size(Y);
     %U=rand(k,n);
     %V=rand(k,m);
     [W,H]=NNDSVD(double(Y),k,2);
-    U=W';
     V=H;
 
 
