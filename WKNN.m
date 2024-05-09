@@ -3,13 +3,10 @@ load('Data') %LD为原始矩阵
 D=cell; %cell的相似矩阵
 L=gene;
 oldLD = LD;
-adLD = oldLD >0;
 %（最佳参数：K=3,a=0.5，a1=a2=1）
 %————————————————以下求KNN————————————————
 L=L-diag(diag(L));
-D=D-diag(diag(D));
 [rL,cL]=size(L);
-[rD,cD]=size(D);
 K=5;  %参数K一般取1，2，3，4，5    
 KNN_L = zeros(rL, cL);  %%for miRNA
 [sort_L,idx]=sort(L,2,'descend');
